@@ -1,0 +1,95 @@
+services:
+
+  postgresql:
+    container_name: postgres_sosu
+    image: postgres
+    environment:
+      POSTGRES_USER: sosu
+      POSTGRES_PASSWORD: password
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - my_network
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin_sosu
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-mypassword}
+      PGCONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - my_network
+    restart: unless-stopped
+
+  mongodb:
+    container_name: mongo_sosu
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: sosu
+      MONGO_INITDB_ROOT_PASSWORD: mypassword
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo:/data/db
+    networks:
+      - my_network
+
+  mongo-express:
+    container_name: mongo_express_sosu
+    image: mongo-express:latest
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: sosu
+      ME_CONFIG_MONGODB_ADMINPASSWORD: mypassword
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_BASICAUTH_USERNAME: sosu
+      ME_CONFIG_BASICAUTH_PASSWORD: mypassword
+    networks:
+      - my_network
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper
+    container_name: zookeeper_sosu
+    environment:
+      ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "22181:2181"
+    networks:
+      - my_network
+
+  kafka:
+    image: confluentinc/cp-kafka
+    container_name: kafka_sosu
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_OFFSET_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT, PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+
+
+networks:
+  my_network:
+    driver: bridge
+
+volumes:
+  postgres:
+  mongo:
+  pgadmin:
