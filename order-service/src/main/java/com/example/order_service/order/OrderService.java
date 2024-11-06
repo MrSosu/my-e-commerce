@@ -10,6 +10,7 @@ import com.example.order_service.payment.PaymentRequest;
 import com.example.order_service.product.ProductClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OrderService {
@@ -27,8 +28,10 @@ public class OrderService {
     @Autowired
     private OrderProducer orderProducer;
 
+    @Transactional
     public OrderResponse createOrder(OrderRequest request) {
 
+        // verifico che il cliente esista effettivamente
         var customer = customerClient.findCustomerById(request.customerId())
                 .orElseThrow(() ->
                         new OrderException("Customer id con id " + request.customerId() + " non esiste!"));
