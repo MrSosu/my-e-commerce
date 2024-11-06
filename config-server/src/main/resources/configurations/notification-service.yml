@@ -1,0 +1,24 @@
+spring:
+  data:
+    mongodb:
+      username: sosu
+      password: mypassword
+      host: localhost
+      port: 27017
+      database: notification
+      authentication-database: admin
+
+  mail:
+    host: localhost
+    port: 1080
+    username: sosu
+    password: mypassword
+    properties:
+      mail:
+        smtp:
+          trust: "*"
+        auth: true
+        starttls:
+          enabled: true
+        connectiontimeout: 5000
+        timeout: 3000

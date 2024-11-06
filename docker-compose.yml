@@ -84,6 +84,12 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT, PLAINTEXT_HOST:PLAINTEXT
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
 
+  mail-dev:
+    container_name: maildev_sosu
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+
 
 networks:
   my_network:
