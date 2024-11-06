@@ -1,5 +1,6 @@
 package com.example.order_service.order;
 
+import com.example.order_service.payment.PaymentMethod;
 import lombok.Builder;
 
 @Builder

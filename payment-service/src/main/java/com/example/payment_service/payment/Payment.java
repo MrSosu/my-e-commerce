@@ -1,7 +1,5 @@
-package com.example.order_service.order;
+package com.example.payment_service.payment;
 
-import com.example.order_service.orderline.OrderLine;
-import com.example.order_service.payment.PaymentMethod;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -10,8 +8,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,34 +18,28 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
-@Table(name = "order")
 @EntityListeners(AuditingEntityListener.class)
-public class Order {
+public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String reference;
-    private Double totalAmount;
-    @Enumerated(value = EnumType.STRING)
+    private Double amount;
+    @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
-    private Long customerId;
-    @OneToMany(mappedBy = "order")
-    private List<OrderLine> orderLines;
-
+    private Long orderId;
     @CreatedDate
-    @Column(updatable = false)
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
-
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
+
 
 }

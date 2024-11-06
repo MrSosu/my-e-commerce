@@ -1,4 +1,4 @@
-package com.example.order_service.order;
+package com.example.payment_service.payment;
 
 public enum PaymentMethod {
 

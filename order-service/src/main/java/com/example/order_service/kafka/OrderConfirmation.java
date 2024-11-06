@@ -1,7 +1,7 @@
 package com.example.order_service.kafka;
 
 import com.example.order_service.customer.CustomerResponse;
-import com.example.order_service.order.PaymentMethod;
+import com.example.order_service.payment.PaymentMethod;
 import com.example.order_service.product.PurchaseResponse;
 import lombok.Builder;
 
