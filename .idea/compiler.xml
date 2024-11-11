@@ -11,6 +11,7 @@
         <module name="payment-service" />
         <module name="customer-service" />
         <module name="discovery" />
+        <module name="gateway-service" />
         <module name="product-service" />
         <module name="order-service" />
         <module name="notification-service" />
@@ -26,6 +27,7 @@
       <module name="config-server" options="-parameters" />
       <module name="customer-service" options="-parameters" />
       <module name="discovery" options="-parameters" />
+      <module name="gateway-service" options="-parameters" />
       <module name="notification-service" options="-parameters" />
       <module name="order-service" options="-parameters" />
       <module name="payment-service" options="-parameters" />
