@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conferma di Pagamento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333333;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: #4CAF50;
+        }
+        .content {
+            line-height: 1.6;
+        }
+        .content p {
+            margin: 10px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Conferma di Pagamento</h1>
+    </div>
+
+    <div class="content">
+        <p>Gentile <strong>{{firstname}} {{lastname}}</strong>,</p>
+        <p>Ti confermiamo che il tuo pagamento è stato elaborato con successo. Di seguito i dettagli della transazione:</p>
+
+        <p><strong>Riepilogo dell'Ordine:</strong></p>
+        <ul>
+            <li><strong>Riferimento Ordine:</strong> {{orderReference}}</li>
+            <li><strong>Importo Totale:</strong> €{{amount}}</li>
+            <li><strong>Metodo di Pagamento:</strong> {{paymentMethod}}</li>
+            <li><strong>Email:</strong> {{email}}</li>
+        </ul>
+
+        <p>Se hai domande o necessiti di assistenza, ti preghiamo di contattarci all'indirizzo supporto@example.com.</p>
+    </div>
+
+    <div class="footer">
+        <p>Grazie per aver scelto i nostri servizi!</p>
+    </div>
+</div>
+
+</body>
+</html>

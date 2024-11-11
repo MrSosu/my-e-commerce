@@ -12,8 +12,6 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
-@Getter
-@Setter
 @Builder
 @Validated
 public record OrderRequest(

@@ -58,7 +58,7 @@ services:
       - my_network
 
   zookeeper:
-    image: confluentinc/cp-zookeeper
+    image: confluentinc/cp-zookeeper:latest
     container_name: zookeeper_sosu
     environment:
       ZOOKEEPER_SERVER_ID: 1
@@ -70,7 +70,7 @@ services:
       - my_network
 
   kafka:
-    image: confluentinc/cp-kafka
+    image: confluentinc/cp-kafka:latest
     container_name: kafka_sosu
     ports:
       - "9092:9092"
@@ -83,12 +83,15 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT, PLAINTEXT_HOST:PLAINTEXT
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+    networks:
+      - my_network
 
   mail-dev:
     container_name: maildev_sosu
     image: maildev/maildev
     ports:
       - 1080:1080
+      - 1025:1025
 
 
 networks:
