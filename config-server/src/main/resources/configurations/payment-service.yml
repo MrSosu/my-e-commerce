@@ -12,16 +12,16 @@ spring:
     show-sql: true
   kafka:
     producer:
-      bootstrap-server: localhost:9092
+      bootstrap-servers: localhost:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
-        spring.json.type.mapping: orderConfirmation:com.example.order_service.kafka.OrderConfirmation
+        spring.json.type.mapping: paymentConfirmation:com.example.payment_service.kafka.PaymentConfirmation
 
 server:
   port: 8093
 
 application:
   config:
-    customer-url: http://localhost:8090/app/v1/customers
-    product-url: http://localhost:8091/app/v1/products
+    customer-url: http://localhost:8222/app/v1/customers
+    product-url: http://localhost:8222/app/v1/products

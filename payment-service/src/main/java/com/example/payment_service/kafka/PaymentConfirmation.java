@@ -4,7 +4,7 @@ import com.example.payment_service.payment.PaymentMethod;
 import lombok.Builder;
 
 @Builder
-public record PaymentNotificationRequest(
+public record PaymentConfirmation(
         String orderReference,
         Double amount,
         PaymentMethod paymentMethod,

@@ -1,3 +1,6 @@
+server:
+  port: 8222
+
 spring:
   config:
     import: optional:configserver:http://localhost:8888
@@ -8,24 +11,38 @@ spring:
       discovery:
         locator:
           enabled: true
-    routes:
-      - id: customer-service
-        uri: lb:http://CUSTOMER-SERVICE
-        predicates:
-          - Path=/app/v1/customers/**
-      - id: product-service
-        uri: lb:http://PRODUCT-SERVICE
-        predicates:
-          - Path=/app/v1/products/**
-      - id: order-service
-        uri: lb:http://ORDER-SERVICE
-        predicates:
-          - Path=/app/v1/orders/**
-      - id: payment-service
-        uri: lb:http://PAYMENT-SERVICE
-        predicates:
-          - Path=/app/v1/payments/**
+      routes:
+        - id: swagger-ui
+          uri: http://localhost:8222
+          predicates:
+            - Path=/swagger-ui/**, /v3/api-docs/**, /swagger-ui.html
+        - id: customer-service
+          uri: http://localhost:8090
+          predicates:
+            - Path=/app/v1/customers/**
+        - id: order-service
+          uri: http://localhost:8092
+          predicates:
+            - Path=/app/v1/orders/**
+        - id: order-lines-service
+          uri: http://localhost:8092
+          predicates:
+            - Path=/app/v1/order-lines/**
+        - id: product-service
+          uri: http://localhost:8091
+          predicates:
+            - Path=/app/v1/products/**
+        - id: payment-service
+          uri: http://localhost:8093
+          predicates:
+            - Path=/app/v1/payments/**
 
-server:
-  port:
-    8222
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0

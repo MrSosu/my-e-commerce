@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/customers
+    url: jdbc:postgresql://localhost:5432/products
     username: sosu
     password: password
   jpa:
@@ -12,4 +12,4 @@ spring:
     show-sql: true
 
 server:
-  port: 8090
+  port: 8091

@@ -10,11 +10,19 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: orderConfirmation:com.example.order_service.kafka.OrderConfirmation
 
 server:
   port: 8092
 
 application:
   config:
-    customer-url: http://localhost:8090/app/v1/customers
-    product-url: http://localhost:8091/app/v1/products
+    customer-url: http://localhost:8222/app/v1/customers
+    product-url: http://localhost:8222/app/v1/products
+    payment-url: http://localhost:8222/app/v1/payments

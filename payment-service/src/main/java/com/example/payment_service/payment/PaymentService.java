@@ -1,7 +1,8 @@
 package com.example.payment_service.payment;
 
+import com.example.payment_service.kafka.PaymentConfirmation;
 import com.example.payment_service.kafka.PaymentNotificationProducer;
-import com.example.payment_service.kafka.PaymentNotificationRequest;
+import com.example.payment_service.kafka.PaymentConfirmation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class PaymentService {
 
         var payment = paymentRepository.save(paymentMapper.toPayment(paymentRequest));
         // invio della notifica tramite Kafka
-        producer.sendNotification(PaymentNotificationRequest
+        producer.sendNotification(PaymentConfirmation
                 .builder()
                         .orderReference(paymentRequest.orderReference())
                         .paymentMethod(paymentRequest.paymentMethod())

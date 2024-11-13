@@ -13,13 +13,14 @@ import static org.springframework.kafka.support.KafkaHeaders.TOPIC;
 public class PaymentNotificationProducer {
 
     @Autowired
-    private KafkaTemplate<String, PaymentNotificationRequest> kafkaTemplate;
+    private KafkaTemplate<String, PaymentConfirmation> kafkaTemplate;
 
-    public void sendNotification(PaymentNotificationRequest request) {
-        Message<PaymentNotificationRequest> message = MessageBuilder
+    public void sendNotification(PaymentConfirmation request) {
+        Message<PaymentConfirmation> message = MessageBuilder
                 .withPayload(request)
                 .setHeader(TOPIC, "payment-topic")
                 .build();
+        kafkaTemplate.send(message);
     }
 
 }

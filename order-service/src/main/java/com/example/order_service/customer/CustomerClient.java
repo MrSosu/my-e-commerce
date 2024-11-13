@@ -13,6 +13,6 @@ import java.util.Optional;
 public interface CustomerClient {
 
     @GetMapping("/get/{id}")
-    Optional<CustomerResponse> findCustomerById(@PathVariable Long customer_id);
+    Optional<CustomerResponse> findCustomerById(@PathVariable Long id);
 
 }

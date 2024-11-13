@@ -8,6 +8,17 @@ spring:
       database: notification
       authentication-database: admin
 
+  kafka:
+    consumer:
+      bootstrap-server: localhost:9092
+      group-id: orderGroup,paymentGroup
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: '*'
+        spring.json.type.mapping: orderConfirmation:com.example.notification_service.kafka.order.OrderConfirmation, paymentConfirmation:com.example.notification_service.kafka.payment.PaymentConfirmation
+
   mail:
     host: localhost
     port: 1080

@@ -8,7 +8,8 @@ public record PaymentRequest(
         Double amount,
         PaymentMethod paymentMethod,
         Long orderId,
-        String reference,
-        CustomerResponse customer
+        String orderReference,  // Rinomina da "reference" a "orderReference"
+        CustomerResponse customer    // Assicurati che il tipo sia coerente con quello usato nel servizio `payment
 ) {
 }
+

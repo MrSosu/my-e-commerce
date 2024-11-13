@@ -20,7 +20,9 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
+        spring.json.trusted.packages: '*'
         spring.json.type.mapping: orderConfirmation:com.example.notification_service.kafka.order.OrderConfirmation, paymentConfirmation:com.example.notification_service.kafka.payment.PaymentConfirmation
+
 
   mail:
     host: localhost

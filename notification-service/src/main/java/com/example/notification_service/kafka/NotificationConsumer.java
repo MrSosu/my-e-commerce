@@ -29,14 +29,14 @@ public class NotificationConsumer {
                 .notificationDate(LocalDateTime.now())
                 .orderConfirmation(orderConfirmation)
                 .build());
-        emailService.sendOrderConfirmationEmail(
+        /*emailService.sendOrderConfirmationEmail(
                 orderConfirmation.customer().email(),
                 orderConfirmation.customer().firstName(),
                 orderConfirmation.customer().lastName(),
                 orderConfirmation.totalAmount(),
                 orderConfirmation.reference(),
                 orderConfirmation.products()
-        );
+        ); */
     }
 
     @KafkaListener(topics = "payment-topic")
@@ -47,14 +47,14 @@ public class NotificationConsumer {
                 .notificationDate(LocalDateTime.now())
                 .paymentConfirmation(paymentConfirmation)
                 .build());
-        emailService.sendPaymentConfirmationEmail(
+        /*emailService.sendPaymentConfirmationEmail(
                 paymentConfirmation.orderReference(),
                 paymentConfirmation.amount(),
                 paymentConfirmation.paymentMethod(),
                 paymentConfirmation.firstname(),
                 paymentConfirmation.lastname(),
                 paymentConfirmation.email()
-        );
+        ); */
     }
 
 }

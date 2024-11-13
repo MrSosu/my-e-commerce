@@ -6,6 +6,7 @@ import com.example.order_service.kafka.OrderConfirmation;
 import com.example.order_service.kafka.OrderProducer;
 import com.example.order_service.orderline.OrderLine;
 import com.example.order_service.orderline.OrderLineService;
+import com.example.order_service.payment.PaymentClient;
 import com.example.order_service.payment.PaymentRequest;
 import com.example.order_service.product.ProductClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class OrderService {
     private OrderLineService orderLineService;
     @Autowired
     private OrderProducer orderProducer;
+    @Autowired
+    private PaymentClient paymentClient;
 
     @Transactional
     public OrderResponse createOrder(OrderRequest request) {
@@ -52,11 +55,12 @@ public class OrderService {
         var paymentRequest = PaymentRequest.builder()
                 .orderId(order.getId())
                 .paymentMethod(request.paymentMethod())
-                .reference(request.reference())
+                .orderReference(request.reference())
                 .amount(request.amount())
-                .customer(customer);
+                .customer(customer)
+                .build();
 
-        // paymentClient.requestOrderPayment(paymentRequest)
+        paymentClient.requestOrderPayment(paymentRequest);
 
         // inviare la conferma dell'ordine tramite Kafka
         orderProducer.sendOrderConfirmation(OrderConfirmation
